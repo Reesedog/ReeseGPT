@@ -1,62 +1,28 @@
-<div class="navbar">
-  <h1 class="navbar-header"><%= link_to 'Plans', plans_path, class: 'navbar-link' %></h1>
-</div>
-<br>
 <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; word-wrap: break-word;">
 
   <tr style="border-bottom: 1px solid black;">
-    <th style="padding: 10px; text-align: left;">Id:</th>
+    <th style="padding: 20px; text-align: left;"> Id:</th>
     <td style="padding: 10px; text-align: left;"><%= plan.id %></td>
   </tr>
   <tr style="border-bottom: 1px solid black;">
-    <th style="padding: 10px; text-align: left;">Name:</th>
+    <th style="padding: 20px; text-align: left;"> Name:</th>
     <td style="padding: 10px; text-align: left;"><%= plan.name %></td>
   </tr>
   <tr style="border-bottom: 1px solid black;">
-    <th style="padding: 10px; text-align: left;">Disability:</th>
+    <th style="padding: 20px; text-align: left;"> Disability:</th>
     <td style="padding: 10px; text-align: left;"><%= plan.disability %></td>
   </tr>
   <tr style="border-bottom: 1px solid black;">
-    <th style="padding: 10px; text-align: left;">Support:</th>
+    <th style="padding: 20px; text-align: left;"> Support:</th>
     <td style="padding: 10px; text-align: left;"><%= plan.support %></td>
   </tr>
   <tr style="border-bottom: 1px solid black;">
-    <th style="padding: 10px; text-align: left;">Goal:</th>
+    <th style="padding: 20px; text-align: left;"> Goal:</th>
     <td style="padding: 10px; text-align: left;"><%= plan.goal %></td>
   </tr>
   <tr style="border-bottom: 1px solid black;">
-    <th style="padding: 10px; text-align: left;">Plan:</th>
+    <th style="padding: 20px; text-align: left;"> Plan:</th>
     <td style="padding: 10px; text-align: left;"><%= plan.plan %></td>
   </tr>
 </table>
 
-<style>
-/* Style the navbar */
-.navbar {
-  width: 100%;
-  background-color: #8E44AD;
-  padding: 20px;
-  text-align: center;
-  font-size: 22px; 
-  font-weight: bold; 
-  text-align: left;
-}
-
-/* Style the navbar header */
-.navbar-header {
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-}
-
-/* Style the navbar links */
-.navbar-link {
-  color: #6ECA53;
-  text-decoration: none;
-}
-
-/* Change color on hover */
-.navbar-link:hover {
-  color: #5a6268;
-}
-</style>

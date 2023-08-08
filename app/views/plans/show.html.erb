@@ -1,10 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<%= render "navbar" %>
 
 <%= render @plan %>
 
-<div>
+<div class="content-margin">
   <%= link_to "Edit this plan", edit_plan_path(@plan) %> |
   <%= link_to "Back to plans", plans_path %>
   <p></p>
   <%= button_to "Destroy this plan", @plan, method: :delete %>
 </div>
+
+<style>
+.content-margin {
+  margin-left: 1%; 
+}
+</style>

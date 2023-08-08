@@ -1,10 +1,12 @@
+<%= render "navbar" %>
 
 
+<div class="container">
+  
 <%= form_with(model: plan) do |form| %>
   <% if plan.errors.any? %>
-    <div style="color: red">
+    <div class="error-box">
       <h2><%= pluralize(plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
-
       <ul>
         <% plan.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -13,37 +15,97 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :id, style: "display: block" %>
+  <div class="form-field">
+    <%= form.label :id %>
     <%= form.number_field :id %>
   </div>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
+  <div class="form-field">
+    <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
 
-  <div>
-    <%= form.label :disability, style: "display: block" %>
+  <div class="form-field">
+    <%= form.label :disability %>
     <%= form.text_field :disability %>
   </div>
 
-  <div>
-    <%= form.label :support, style: "display: block" %>
-    <%= form.text_field :support %>
+  <div class="form-field">
+    <%= form.label :support %>
+    <%= form.text_area :support, rows: 5 %> 
   </div>
 
-  <div>
-    <%= form.label :goal, style: "display: block" %>
-    <%= form.text_field :goal %>
+  <div class="form-field">
+    <%= form.label :goal %>
+    <%= form.text_area :goal, rows: 5 %>
   </div>
 
-  <div>
-    <%= form.label :plan, style: "display: block" %>
-    <%= form.text_field :plan %>
+  <div class="form-field">
+    <%= form.label :plan %>
+    <%= form.text_area :plan, rows: 5 %> <!-- 这里设置了5行 -->
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-field">
+    <%= form.submit "Submit", class: "button" %>
   </div>
+
 <% end %>
+
+</div>
+
+
+
+
+<style>
+  .container {
+    margin: 1%;  /* 设置外部空间 */
+    /* 或使用 padding: 40px; 来设置内部空间 */
+  }
+
+  .error-box {
+    color: red;
+  }
+
+  .form-field {
+    margin-bottom: 20px;
+  }
+
+  .form-field label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .form-field input[type="text"],
+  .form-field input[type="number"] {
+    width: 100%;   /* 使输入框填满容器 */
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical; /* 允许垂直调整大小，但不允许水平调整大小 */
+}
+
+.button {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 5px;
+  background-color: #8E44AD;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  font-size: 14px; 
+  font-weight: bold; 
+}
+
+.button:hover {
+  background-color: black;
+}
+</style>
+
+
+
+

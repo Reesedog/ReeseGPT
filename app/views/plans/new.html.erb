@@ -1,9 +1,13 @@
-<h1>New plan</h1>
-
 <%= render "form", plan: @plan %>
 
 <br>
 
-<div>
+<div class="content-margin">
   <%= link_to "Back to plans", plans_path %>
 </div>
+
+<style>
+.content-margin {
+  margin-left: 1%; 
+}
+</style>
