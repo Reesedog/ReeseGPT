@@ -1,0 +1,49 @@
+
+
+<%= form_with(model: plan) do |form| %>
+  <% if plan.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
+
+      <ul>
+        <% plan.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :id, style: "display: block" %>
+    <%= form.number_field :id %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :disability, style: "display: block" %>
+    <%= form.text_field :disability %>
+  </div>
+
+  <div>
+    <%= form.label :support, style: "display: block" %>
+    <%= form.text_field :support %>
+  </div>
+
+  <div>
+    <%= form.label :goal, style: "display: block" %>
+    <%= form.text_field :goal %>
+  </div>
+
+  <div>
+    <%= form.label :plan, style: "display: block" %>
+    <%= form.text_field :plan %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

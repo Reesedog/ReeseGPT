@@ -1,0 +1,36 @@
+[81325] Puma starting in cluster mode...
+[81325] * Puma version: 5.6.6 (ruby 3.0.0-p0) ("Birdie's Version")
+[81325] *  Min threads: 5
+[81325] *  Max threads: 5
+[81325] *  Environment: development
+[81325] *   Master PID: 81325
+[81325] *      Workers: 2
+[81325] *     Restarts: (✔) hot (✖) phased
+[81325] * Preloading application
+[81325] * Listening on http://0.0.0.0:3000
+[81325] ! WARNING: Detected 1 Thread(s) started in app boot:
+[81325] ! #<Thread:0x000055b3625bb588@DEBUGGER__::SESSION@server /home/ubt/.rbenv/versions/3.0.0/lib/ruby/gems/3.0.0/gems/debug-1.8.0/lib/debug/session.rb:179 sleep_forever> - /home/ubt/.rbenv/versions/3.0.0/lib/ruby/gems/3.0.0/gems/debug-1.8.0/lib/debug/session.rb:244:in `pop'
+[81325] Use Ctrl-C to stop
+[81325] - Worker 0 (PID: 81353) booted in 0.0s, phase: 0
+[81325] - Worker 1 (PID: 81356) booted in 0.01s, phase: 0
+[81325] - Gracefully shutting down workers...
+[81325] === puma shutdown: 2023-08-07 13:13:56 +0000 ===
+[81325] - Goodbye!
+[82585] Puma starting in cluster mode...
+[82585] * Puma version: 5.6.6 (ruby 3.0.0-p0) ("Birdie's Version")
+[82585] *  Min threads: 5
+[82585] *  Max threads: 5
+[82585] *  Environment: development
+[82585] *   Master PID: 82585
+[82585] *      Workers: 2
+[82585] *     Restarts: (✔) hot (✖) phased
+[82585] * Preloading application
+[82585] * Listening on http://0.0.0.0:3000
+[82585] ! WARNING: Detected 1 Thread(s) started in app boot:
+[82585] ! #<Thread:0x0000560c0e9ebe50@DEBUGGER__::SESSION@server /home/ubt/.rbenv/versions/3.0.0/lib/ruby/gems/3.0.0/gems/debug-1.8.0/lib/debug/session.rb:179 sleep_forever> - /home/ubt/.rbenv/versions/3.0.0/lib/ruby/gems/3.0.0/gems/debug-1.8.0/lib/debug/session.rb:244:in `pop'
+[82585] Use Ctrl-C to stop
+[82585] - Worker 0 (PID: 82615) booted in 0.0s, phase: 0
+[82585] - Worker 1 (PID: 82617) booted in 0.01s, phase: 0
+[82585] - Gracefully shutting down workers...
+[82585] === puma shutdown: 2023-08-07 13:29:47 +0000 ===
+[82585] - Goodbye!

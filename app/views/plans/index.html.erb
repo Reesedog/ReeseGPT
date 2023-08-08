@@ -1,0 +1,82 @@
+<div class="navbar">
+  <h1 class="navbar-header"><%= link_to 'Plans', plans_path, class: 'navbar-link' %></h1>
+</div>
+
+<p style="color: green; margin: 0;"><%= notice %></p>
+<br>
+
+<table style="width: 100%; border-collapse: collapse; text-align: left;">
+  <thead style="background-color: #f8f9fa;">
+    <tr>
+      <th style="padding: 10px; border-bottom: 1px solid #dee2e6;">Id</th>
+      <th style="padding: 10px; border-bottom: 1px solid #dee2e6;">Name</th>
+      
+      <th style="padding: 10px; border-bottom: 1px solid #dee2e6;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @plans.each do |plan| %>
+      <tr>
+        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><%= plan.id %></td>
+        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><%= plan.name %></td>
+        
+        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">
+          <%= link_to 'Show', plan, class: 'button' %>
+          <%= link_to 'Edit', edit_plan_path(plan), class: 'button' %>
+          </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New plan", new_plan_path, class: 'button' %>
+
+<style>
+.button {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 5px;
+  background-color: #8E44AD;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  font-size: 14px; 
+  font-weight: bold; 
+}
+
+.button:hover {
+  background-color: black;
+}
+</style>
+
+<style>
+/* Style the navbar */
+.navbar {
+  width: 100%;
+  background-color: #8E44AD;
+  padding: 20px;
+  text-align: center;
+  font-size: 22px; 
+  font-weight: bold; 
+  text-align: left;
+}
+
+/* Style the navbar header */
+.navbar-header {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+/* Style the navbar links */
+.navbar-link {
+  color: #28B463;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.navbar-link:hover {
+  color: #5a6268;
+}
+</style>
