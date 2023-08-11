@@ -1,5 +1,4 @@
 <%= render "navbar" %>
-
 <table style="width: 100%; border-collapse: collapse; text-align: center;">
   <thead style="background-color: #f8f9fa;">
     <tr>
@@ -13,35 +12,31 @@
       <tr>
         <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><%= plan.id %></td>
         <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><%= plan.name %></td>
-        
         <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">
           <%= link_to 'Show', plan, class: 'button' %>
           <%= link_to 'Edit', edit_plan_path(plan), class: 'button' %>
-          </td>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <br>
 <%= link_to "New plan", new_plan_path, class: 'button', style: 'margin: 10px 20px;' %>
-
 <style>
-.button {
-  display: inline-block;
-  padding: 5px 10px;
-  margin: 5px;
-  background-color: #8E44AD;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-  font-size: 14px; 
-  font-weight: bold; 
-}
+  .button {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #8E44AD;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-size: 14px;
+    font-weight: bold;
+  }
 
-.button:hover {
-  background-color: black;
-}
+  .button:hover {
+    background-color: black;
+  }
 </style>
-
-

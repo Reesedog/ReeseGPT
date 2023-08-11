@@ -1,16 +1,44 @@
 <%= render "navbar" %>
-
 <%= render @plan %>
-
 <div class="content-margin">
-  <%= link_to "Edit this plan", edit_plan_path(@plan) %> |
-  <%= link_to "Back to plans", plans_path %>
+  <%= link_to "Edit this plan", edit_plan_path(@plan), class: "button" %>
   <p></p>
-  <%= button_to "Destroy this plan", @plan, method: :delete %>
+  <%= button_to "Delete", @plan, method: :delete, class: "button_r" %>
+  <br>
+  <br>
 </div>
-
 <style>
-.content-margin {
-  margin-left: 1%; 
-}
+  .content-margin {
+    margin-left: 1%;
+  }
+
+  .button {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #8E44AD;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .button_r {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #d93627;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .button:hover {
+    background-color: black;
+  }
 </style>

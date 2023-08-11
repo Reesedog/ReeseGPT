@@ -1,70 +1,42 @@
 <%= render "navbar" %>
-
-
 <div class="container">
-  
-<%= form_with(model: plan) do |form| %>
-  <% if plan.errors.any? %>
-    <div class="error-box">
-      <h2><%= pluralize(plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
-      <ul>
-        <% plan.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <br>
+  <%= form_with(model: plan) do |form| %>
+    <div class="form-field">
+      <%= form.label :id %>
+      <%= form.number_field :id %>
+    </div>
+    <div class="form-field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+    <div class="form-field">
+      <%= form.label :disability %>
+      <%= form.text_field :disability %>
+    </div>
+    <div class="form-field">
+      <%= form.label :support %>
+      <%= form.text_area :support, rows: 5 %>
+    </div>
+    <div class="form-field">
+      <%= form.label :goal %>
+      <%= form.text_area :goal, rows: 5 %>
+    </div>
+    <div class="form-field">
+      <%= form.label :plan %>
+      <%= form.text_area :plan, rows: 5 %> <!-- 这里设置了5行 -->
+    </div>
+    <div class="form-field">
+      <%= form.submit "Submit", class: "button" %>
     </div>
   <% end %>
-
-  <div class="form-field">
-    <%= form.label :id %>
-    <%= form.number_field :id %>
-  </div>
-
-  <div class="form-field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="form-field">
-    <%= form.label :disability %>
-    <%= form.text_field :disability %>
-  </div>
-
-  <div class="form-field">
-    <%= form.label :support %>
-    <%= form.text_area :support, rows: 5 %> 
-  </div>
-
-  <div class="form-field">
-    <%= form.label :goal %>
-    <%= form.text_area :goal, rows: 5 %>
-  </div>
-
-  <div class="form-field">
-    <%= form.label :plan %>
-    <%= form.text_area :plan, rows: 5 %> <!-- 这里设置了5行 -->
-  </div>
-
-  <div class="form-field">
-    <%= form.submit "Submit", class: "button" %>
-  </div>
-
-<% end %>
-
 </div>
-
-
-
-
 <style>
   .container {
     margin: 1%;  /* 设置外部空间 */
     /* 或使用 padding: 40px; 来设置内部空间 */
   }
 
-  .error-box {
-    color: red;
-  }
 
   .form-field {
     margin-bottom: 20px;
@@ -86,9 +58,9 @@
   width: 100%;
   box-sizing: border-box;
   resize: vertical; /* 允许垂直调整大小，但不允许水平调整大小 */
-}
+  }
 
-.button {
+  .button {
   display: inline-block;
   padding: 5px 10px;
   margin: 5px;
@@ -97,15 +69,11 @@
   text-decoration: none;
   border-radius: 4px;
   transition: background-color 0.3s;
-  font-size: 14px; 
-  font-weight: bold; 
-}
+  font-size: 14px;
+  font-weight: bold;
+  }
 
-.button:hover {
+  .button:hover {
   background-color: black;
-}
+  }
 </style>
-
-
-
-
