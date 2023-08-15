@@ -1,5 +1,12 @@
 <div class="navbar">
-  <h1 class="navbar-header"><%= link_to 'Plans', plans_path, class: 'navbar-link' %></h1>
+  <h1 class="navbar-header"><%= link_to 'Plandis', plans_path, class: 'navbar-link' %></h1>
+  <h1 class="navbar-header"><% if user_signed_in? %>
+      <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, 
+      style: "background-color: transparent; border: none; color: white; float: right;" %>
+    <% else %>
+      <%= button_to 'Sign In', new_user_session_path, class: 'navbar-link',
+       style: "background-color: transparent; border: none; color: white; float: right;"%>
+    <% end %></h1>
 </div>
 <style>
   body {

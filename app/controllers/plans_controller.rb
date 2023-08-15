@@ -1,4 +1,4 @@
-require 'net/http'
+require "net/http"
 
 class PlansController < ApplicationController
   before_action :set_plan, only: %i[ show edit update destroy ]
@@ -63,39 +63,40 @@ class PlansController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_plan
-      @plan = Plan.find(params[:id])
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_plan
+    @plan = Plan.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def plan_params
+    params.require(:plan).permit(:id, :name, :disability, :support, :goal, :plan)
+  end
+
+  def request_openai(disability_input)
+    # 设置 API 端点和你的引擎ID
+    uri = URI.parse("https://api.openai.com/v1/completions") # 替换 YOUR_ENGINE_ID
+
+    # 创建一个 POST 请求
+    request = Net::HTTP::Post.new(uri)
+    request["Authorization"] = "Bearer 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" # 替换 YOUR_API_KEY
+    request["Content-Type"] = "application/json"
+    request.body = JSON.dump({
+      "prompt" => disability_input,
+      "model" => "ada:ft-personal-2023-08-10-06-53-18",
+    })
+
+    # 使用 Net::HTTP 发送请求
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
+      http.request(request)
     end
 
-    # Only allow a list of trusted parameters through.
-    def plan_params
-      params.require(:plan).permit(:id, :name, :disability, :support, :goal, :plan)
-    end
+    # 解析响应并提取建议的 plan
+    json_response = JSON.parse(response.body)
+    puts response.body
+    suggested_plan = json_response["choices"].first["text"].strip
 
-    def request_openai(disability_input)
-      # 设置 API 端点和你的引擎ID
-      uri = URI.parse("https://api.openai.com/v1/completions") # 替换 YOUR_ENGINE_ID
-    
-      # 创建一个 POST 请求
-      request = Net::HTTP::Post.new(uri)
-      request["Authorization"] = "Bearer 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" # 替换 YOUR_API_KEY
-      request["Content-Type"] = "application/json"
-      request.body = JSON.dump({
-        "prompt" => disability_input,
-        "model" => "ada:ft-personal-2023-08-10-06-53-18"
-      })
-    
-      # 使用 Net::HTTP 发送请求
-      response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') do |http|
-        http.request(request)
-      end
-    
-      # 解析响应并提取建议的 plan
-      json_response = JSON.parse(response.body)
-      puts response.body
-      suggested_plan = json_response["choices"].first["text"].strip
-
-      return suggested_plan
-    end
+    return suggested_plan
+  end
 end
