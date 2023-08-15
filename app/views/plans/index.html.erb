@@ -9,14 +9,16 @@
   </thead>
   <tbody>
     <% @plans.each do |plan| %>
-      <tr>
-        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><%= plan.id %></td>
-        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><%= plan.name %></td>
-        <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">
-          <%= link_to 'Show', plan, class: 'button' %>
-          <%= link_to 'Edit', edit_plan_path(plan), class: 'button' %>
-        </td>
-      </tr>
+      <%if plan.user == current_user %>
+        <tr>
+          <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><%= plan.id %></td>
+          <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><%= plan.name %></td>
+          <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">
+            <%= link_to 'Show', plan, class: 'button' %>
+            <%= link_to 'Edit', edit_plan_path(plan), class: 'button' %>
+          </td>
+        </tr>
+      <%end%>
     <% end %>
   </tbody>
 </table>

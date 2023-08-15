@@ -2,6 +2,8 @@ require "net/http"
 
 class PlansController < ApplicationController
   before_action :set_plan, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /plans or /plans.json
   def index
@@ -14,16 +16,23 @@ class PlansController < ApplicationController
 
   # GET /plans/new
   def new
-    @plan = Plan.new
+    # @plan = Plan.new
+    @plan = current_user.plans.build
   end
 
   # GET /plans/1/edit
   def edit
   end
 
+  def correct_user
+    @plan = current_user.plans.find_by(id: params[:id])
+    redirect_to plans_path, notice: "Not authorizedto edit this plan" if @friend.nil?
+  end
+
   # POST /plans or /plans.json
   def create
-    @plan = Plan.new(plan_params)
+    # @plan = Plan.new(plan_params)
+    @plan =current_user.plans.build(plan_params)
 
     suggested_plan = request_openai(@plan.disability)
     @plan.plan = suggested_plan
@@ -71,7 +80,7 @@ class PlansController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def plan_params
-    params.require(:plan).permit(:id, :name, :disability, :support, :goal, :plan)
+    params.require(:plan).permit(:id, :name, :disability, :support, :goal, :plan, :user_id)
   end
 
   def request_openai(disability_input)

@@ -22,7 +22,9 @@
       <%= form.label :goal %>
       <%= form.text_area :goal, rows: 5 %>
     </div>
-   
+    <div class="form-field">
+      <%= form.number_field :user_id,id: :plan_user_id, value:current_user.id, type: :hidden%>
+    </div>
     <div class="form-field">
       <%= form.submit "Submit", class: "button" %>
     </div>
