@@ -26,7 +26,7 @@ class PlansController < ApplicationController
 
   def correct_user
     @plan = current_user.plans.find_by(id: params[:id])
-    redirect_to plans_path, notice: "Not authorizedto edit this plan" if @friend.nil?
+    redirect_to plans_path, notice: "Not authorizedto edit this plan" if @plan.nil?
   end
 
   # POST /plans or /plans.json
@@ -89,7 +89,7 @@ class PlansController < ApplicationController
 
     # 创建一个 POST 请求
     request = Net::HTTP::Post.new(uri)
-    request["Authorization"] = "Bearer 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" # 替换 YOUR_API_KEY
+    request["Authorization"] = "Bearer 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" # 替换 YOUR_API_KEY
     request["Content-Type"] = "application/json"
     request.body = JSON.dump({
       "prompt" => disability_input,

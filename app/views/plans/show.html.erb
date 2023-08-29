@@ -1,7 +1,7 @@
 <%= render "navbar" %>
 <%= render @plan %>
 <div class="content-margin">
-  <%= link_to "Edit this plan", edit_plan_path(@plan), class: "button" %>
+  <%= button_to "Edit this plan", edit_plan_path(@plan), class: "button" %>
   <p></p>
   <%= button_to "Delete", @plan, method: :delete, class: "button_r" %>
   <br>

@@ -1,26 +1,83 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<body>
+  <div class="container">
+    <h2 class="text-center">Log in</h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+      <div class="actions">
+        <%= f.submit "Log in" %>
+      </div>
+    <% end %>
+    <%= render "devise/shared/links" %>
   </div>
+  <div class="circle-bottom-left"></div>
+  <div class="circle-bottom-right"></div>
+</body>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+<Style>
+  body {
+      font-family: 'Arial', sans-serif; /* 使用Arial字体 */
+      background-color: #f4f4f4; /* 设定背景颜色 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* 让内容垂直居中 */
+  }
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+  .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px; /* 圆角 */
+      width: 350px; /* 容器宽度 */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 箱体阴影 */
+  }
 
-<%= render "devise/shared/links" %>
+  .field {
+      margin-bottom: 20px; /* 为每个字段添加边距 */
+  }
+
+  .actions {
+      text-align: center; /* 居中按钮 */
+  }
+
+  /* 左下角的四分之一圆 */
+.circle-bottom-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 500px;
+    height: 500px;
+    background-color: #333;
+    border-top-right-radius: 500px;  /* 使用四分之一圆角 */
+    border-bottom: none;
+    border-left: none;
+    background-color: #208bc9;
+}
+
+/* 右下角的四分之一圆 */
+.circle-bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 500px;
+    height: 500px;
+    background-color: #333;
+    border-top-left-radius: 500px;   /* 使用四分之一圆角 */
+    border-bottom: none;
+    border-right: none;
+    background-color: #208bc9;
+}
+</Style>
