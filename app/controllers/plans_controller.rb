@@ -32,7 +32,7 @@ class PlansController < ApplicationController
   # POST /plans or /plans.json
   def create
     # @plan = Plan.new(plan_params)
-    @plan =current_user.plans.build(plan_params)
+    @plan = current_user.plans.build(plan_params)
 
     suggested_plan = request_openai(@plan.disability)
     @plan.plan = suggested_plan
@@ -84,27 +84,31 @@ class PlansController < ApplicationController
   end
 
   def request_openai(disability_input)
-    # 设置 API 端点和你的引擎ID
-    uri = URI.parse("https://api.openai.com/v1/completions") # 替换 YOUR_ENGINE_ID
-
-    # 创建一个 POST 请求
+    # 设置 API 端点
+    uri = URI("https://api.openai.com/v1/chat/completions")
     request = Net::HTTP::Post.new(uri)
-    request["Authorization"] = "Bearer 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" # 替换 YOUR_API_KEY
+    request["Authorization"] = "Bearer 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" # 上传github时记得删除
     request["Content-Type"] = "application/json"
+
+    messages = [{
+      "role" => "user",
+      "content" => disability_input,
+    }]
+
     request.body = JSON.dump({
-      "prompt" => disability_input,
-      "model" => "ada:ft-personal-2023-08-10-06-53-18",
+      "model" => "gpt-4",
+      "messages" => messages,
+      "temperature" => 0.7,
     })
 
-    # 使用 Net::HTTP 发送请求
-    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
       http.request(request)
     end
 
     # 解析响应并提取建议的 plan
     json_response = JSON.parse(response.body)
     puts response.body
-    suggested_plan = json_response["choices"].first["text"].strip
+    suggested_plan = json_response["choices"][0]["message"]["content"]
 
     return suggested_plan
   end
