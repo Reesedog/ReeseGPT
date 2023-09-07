@@ -19,14 +19,13 @@ class ConversationsController < ApplicationController
 
   
 
-  # POST /conversations or /conversations.json
   def create
-    formatted_input = "user: #{conversation_params[:text]}"
-    @conversation = current_user.conversations.build(text: formatted_input)
-
-    gpt_response = get_gpt_response(formatted_input)
-
-    @conversation.text += "\nassistant: #{gpt_response}"
+    formatted_input = { role: "user", content: conversation_params[:text] }
+    @conversation = current_user.conversations.build(text: [formatted_input])
+  
+    gpt_response = get_gpt_response(@conversation.text)
+  
+    @conversation.text << { role: "assistant", content: gpt_response }
     respond_to do |format|
       if @conversation.save
         format.html { redirect_to conversation_url(@conversation), notice: "Conversation was successfully created." }
@@ -37,16 +36,15 @@ class ConversationsController < ApplicationController
       end
     end
   end
-
-  def update
-    user_input = params[:new_text]
-    formatted_input = "user: #{user_input}"
-    @conversation.text += "\n#{formatted_input}"
-
-    gpt_response = get_gpt_response(@conversation.text)
-
-    @conversation.text += "\nassistant: #{gpt_response}"
   
+  def update
+    user_input = { role: "user", content: params[:new_text] }
+    @conversation.text << user_input
+  
+    gpt_response = get_gpt_response(@conversation.text)
+  
+    @conversation.text << { role: "assistant", content: gpt_response }
+    
     respond_to do |format|
       if @conversation.save
         format.html { redirect_to edit_conversation_url(@conversation), notice: "Message was successfully sent." }
@@ -88,27 +86,25 @@ class ConversationsController < ApplicationController
     messages
   end
 
-  def get_gpt_response(user_input)
+  def get_gpt_response(messages)
     uri = URI("https://api.openai.com/v1/chat/completions")
     request = Net::HTTP::Post.new(uri)
-    request["Authorization"] = 
+    request["Authorization"] = "Bearer "
     request["Content-Type"] = "application/json"
-
-    messages = text_to_messages(user_input)
-
+  
     request.body = JSON.dump({
       "model" => "gpt-4",
-      "messages" => messages,
+      "messages" => messages.map { |msg| msg.transform_keys(&:to_s) },
       "temperature" => 0.7,
     })
-
+  
     response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
       http.request(request)
     end
-
+  
     json_response = JSON.parse(response.body)
     suggested_plan = json_response["choices"][0]["message"]["content"]
-
+  
     return suggested_plan
   end
 end

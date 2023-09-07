@@ -1,14 +1,20 @@
-<p style="color: green"><%= notice %></p>
+<%= render "navbar" %>
 
-<h1>Conversations</h1>
+<div style="color: rgb(22 101 52); margin-bottom: 20px; text-align: center; font-size: 1.5em;">
+  <p><%= notice %></p>
+</div>
 
-<div id="conversations">
+<div id="conversations" style="margin: 20px;">
   <% @conversations.each do |conversation| %>
-    <%= render conversation %>
-    <p>
-      <%= link_to "Show this conversation", conversation %>
-    </p>
+    <div style="display: flex; justify-content: space-between; align-items: center; background-color: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+        ID: <%= conversation.id %>
+      <%= link_to "Show", conversation, style: "background-color: rgb(22 101 52); color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 1em;" %>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New conversation", new_conversation_path %>
+<div style="margin: 40px 25px ; text-align: right;">
+  <%= link_to "New conversation", new_conversation_path, style: "background-color: rgb(22 101 52); color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 1em;" %>
+</div>
+
+

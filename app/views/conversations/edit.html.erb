@@ -1,9 +1,9 @@
-<h1>NDIS GPT</h1>
+<%= render "navbar" %>
 
 <div style="width: 600px; margin: 0 auto; border: 1px solid #ccc; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-  <div style="max-height: 400px; overflow-y: auto; margin-bottom: 20px; border: 1px solid #e1e1e1; padding: 10px;">
-    <% text_to_messages(@conversation.text).each do |message| %>
-      <div style="<%= message["role"] == 'user' ? 'padding: 10px; margin: 5px 0; border-radius: 5px; background-color: #e1e1e1; color: black;' : 'padding: 10px; margin: 5px 0; border-radius: 5px; background-color: #8E44AD; color: white;' %>">
+  <div style="max-height: 800px; overflow-y: auto; margin-bottom: 20px; border: 1px solid #e1e1e1; padding: 10px;">
+    <% @conversation.text.each do |message| %>
+      <div style="<%= message["role"] == 'user' ? 'padding: 10px; margin: 5px 0; border-radius: 5px; background-color: #e1e1e1; color: black;' : 'padding: 10px; margin: 5px 0; border-radius: 5px; background-color: #15803d; color: white;' %>">
         <strong><%= message["role"].capitalize %>:</strong> <%= message["content"] %>
       </div>
     <% end %>

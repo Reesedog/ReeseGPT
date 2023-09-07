@@ -1,10 +1,21 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @conversation %>
-
+<%= render "navbar" %>
 <div>
-  <%= link_to "Edit this conversation", edit_conversation_path(@conversation) %> |
-  <%= link_to "Back to conversations", conversations_path %>
-
   <%= button_to "Destroy this conversation", @conversation, method: :delete %>
 </div>
+<div style="width: 600px; margin: 0 auto; border: 1px solid #ccc; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+  <div style="max-height: 670px; overflow-y: auto; margin-bottom: 20px; border: 1px solid #e1e1e1; padding: 10px;">
+    <% @conversation.text.each do |message| %>
+      <div style="<%= message["role"] == 'user' ? 'padding: 10px; margin: 5px 0; border-radius: 5px; background-color: #e1e1e1; color: black;' : 'padding: 10px; margin: 5px 0; border-radius: 5px; background-color: #15803d; color: white;' %>">
+        <strong><%= message["role"].capitalize %>:</strong> <%= simple_format(message["content"]) %>
+      </div>
+    <% end %>
+  </div>
+  <%= form_with(model: @conversation, method: :patch, local: true) do |form| %>
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <%= form.label :new_text, "Your Message:", style: "margin-right: 10px;" %>
+      <%= text_field_tag :new_text, nil, style: "flex-grow: 1; margin-right: 10px;" %>
+      <%= form.submit "Send", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+

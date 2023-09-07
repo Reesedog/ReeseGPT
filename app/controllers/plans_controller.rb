@@ -31,35 +31,43 @@ class PlansController < ApplicationController
 
   # POST /plans or /plans.json
   def create
-    # @plan = Plan.new(plan_params)
-    @plan = current_user.plans.build(plan_params)
-
-    suggested_plan = request_openai(@plan.disability)
-    @plan.plan = suggested_plan
-
+    formatted_input = { role: "user", content: conversation_params[:text] }
+    @conversation = current_user.conversations.build(text: [formatted_input])
+  
+    gpt_response = get_gpt_response(@conversation.text)
+  
+    @conversation.text << { role: "assistant", content: gpt_response }
     respond_to do |format|
-      if @plan.save
-        format.html { redirect_to plan_url(@plan), notice: "Plan was successfully created." }
-        format.json { render :show, status: :created, location: @plan }
+      if @conversation.save
+        format.html { redirect_to conversation_url(@conversation), notice: "Conversation was successfully created." }
+        format.json { render :show, status: :created, location: @conversation }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @plan.errors, status: :unprocessable_entity }
+        format.json { render json: @conversation.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /plans/1 or /plans/1.json
   def update
-    respond_to do |format|
-      if @plan.update(plan_params)
-        format.html { redirect_to plan_url(@plan), notice: "Plan was successfully updated." }
-        format.json { render :show, status: :ok, location: @plan }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @plan.errors, status: :unprocessable_entity }
-      end
+  user_input = { role: "user", content: params[:new_text] }
+  @conversation.text << user_input
+
+  gpt_response = get_gpt_response(@conversation.text)
+
+  @conversation.text << { role: "assistant", content: gpt_response }
+  
+  respond_to do |format|
+    if @conversation.save
+      format.html { redirect_to edit_conversation_url(@conversation), notice: "Message was successfully sent." }
+      format.json { render :show, status: :ok, location: @conversation }
+    else
+      format.html { render :edit, status: :unprocessable_entity }
+      format.json { render json: @conversation.errors, status: :unprocessable_entity }
     end
   end
+end
+
 
   # DELETE /plans/1 or /plans/1.json
   def destroy
@@ -87,7 +95,7 @@ class PlansController < ApplicationController
     # 设置 API 端点
     uri = URI("https://api.openai.com/v1/chat/completions")
     request = Net::HTTP::Post.new(uri)
-    request["Authorization"] =  # 上传github时记得删除
+    request["Authorization"] = "Bearer " # 上传github时记得删除
     request["Content-Type"] = "application/json"
 
     messages = [{
