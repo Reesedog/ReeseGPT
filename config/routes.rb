@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :conversations
   root to: 'plans#index'
   resources :plans
   devise_for :users

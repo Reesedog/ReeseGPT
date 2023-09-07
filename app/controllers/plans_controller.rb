@@ -87,7 +87,7 @@ class PlansController < ApplicationController
     # 设置 API 端点
     uri = URI("https://api.openai.com/v1/chat/completions")
     request = Net::HTTP::Post.new(uri)
-    request["Authorization"] = "Bearer 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" # 上传github时记得删除
+    request["Authorization"] =  # 上传github时记得删除
     request["Content-Type"] = "application/json"
 
     messages = [{
